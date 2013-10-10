@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     if(!localStorage["options_url"])
     {
-        $('#status').html('<span style="color:red">ERROR:</span> Please edit the options and enter the url of your shortener service!');
+        $('#status').html('<span style="color:red">ERROR:</span> Please edit the options of this extension and enter the url of your shortener service.');
     }
     else
     {
