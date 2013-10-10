@@ -12,14 +12,25 @@ $(document).ready(function(){
                 type: 'GET',
                 url: localStorage["options_url"],
                 data: {APICreate: tab.url, authKey: pw},
+                error: function()
+                {
+                    $('#status').html('ERROR');
+                },
                 success: function(response)
                 {
-                    $json_response = $.parseJSON(response);
-                    $("#url").val($json_response.shortenedLink);
-                    //Copy to clipboard
-                    $('#url').select();
-                    document.execCommand("Copy");
-                    $('#status').html('Copied to clipboard');
+                    try
+                    {
+                        $json_response = $.parseJSON(response);
+                        $("#url").val($json_response.shortenedLink);
+                        //Copy to clipboard
+                        $('#url').select();
+                        document.execCommand("Copy");
+                        $('#status').html('Copied to clipboard');
+                    }
+                    catch(e)
+                    {
+                        $('#status').html(e.message);
+                    }
                 }
             })
         });
