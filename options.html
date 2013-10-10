@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener Chrome Extension Configuration</title>
+    <link rel="stylesheet" href="ext/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="well">
+            <img src="icons/icon_048.png" />
+            Chrome Settings <small>URL shortener </small>
+        </h1>
+        <small class="pull-right text-muted">View source <a href="https://github.com/pawy/url_shortener" target="_blank">@github</a></small>
+
+        <h3>General Settings</h3>
+        <hr>
+        <form>
+            <div class="form-group">
+                <label for="url">URL of your Shortener</label>
+                <input type="url" class="form-control" placeholder="http://yourdomain.com/short" id="url" required/>
+            </div>
+            <div class="form-group">
+                <label for="password">MD5 encrypted password (optional)</label>
+                <input type="text" class="form-control" placeholder="the md5 encrypted password" id="password"/>
+            </div>
+            <hr>
+                <button id="save" class="btn btn-primary">Save Settings</button>
+                <div id="status" class="alert alert-info"></div>
+        </form>
+        <hr>
+        2013 - Pascal Wyss
+    </div>
+</body>
+
+<script src="ext/jquery-2.0.3.min.js"></script>
+<script src="options.js"></script>
+</body>
+</html>
