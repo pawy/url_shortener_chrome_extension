@@ -69,9 +69,15 @@ function restore_options() {
 }
 
 $(document).ready(function(){
+
     restore_options();
+
     $('form').submit(function(event){
         save_options();
         event.preventDefault();
+    });
+
+    $('#doubleu').click(function(){
+       $('#url').val("http://doubleu.ch");
     });
 });
