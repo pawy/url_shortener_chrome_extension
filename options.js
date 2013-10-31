@@ -16,14 +16,14 @@ function save_options() {
         data: {APIVersion: 'test'},
         error: function()
         {
-            showError();
+            showError("There was an error in requesting the url.");
         },
         success: function(response)
         {
             try
             {
-                $json_response = $.parseJSON(response);
-                if($json_response.V >= 1)
+                $json_response = response;
+                if($json_response.V >= 1.1)
                 {
                     localStorage["options_url"] = url;
                     localStorage["options_password"] = $('#password').val();
@@ -34,23 +34,23 @@ function save_options() {
                 }
                 else
                 {
-                    showError();
+                    showError("The version of the shortener API is below 1.1");
                 }
             }
             catch(e)
             {
-                showError();
+                showError(e.message);
             }
 
         }
     });
 }
 
-function showError()
+function showError(message)
 {
     $status.removeClass('alert-info');
     $status.addClass('alert-danger');
-    $status.html('ERROR: The given url is not a valid url shortener service.');
+    $status.html('ERROR: ' + message);
     setTimeout(function() {
         $status.fadeOut('slow');
     }, 2000);
