@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "URL Shortener Extension",
-	"version": "1.0",
+	"version": "1.2",
 	"description": "Create short URLs directly out of Chrome. This extension needs a valid [https://github.com/pawy/url_shortener] installation",
 	"page_action": {
         "default_icon": {
