@@ -9,9 +9,9 @@ $(document).ready(function(){
         var pw = localStorage["options_password"];
         chrome.tabs.getSelected(null, function(tab){
             $.ajax({
-                type: 'GET',
-                url: localStorage["options_url"],
-                data: {APICreate: tab.url, authKey: pw},
+                type: 'POST',
+                url: localStorage["options_url"] + '/surlapi/surl',
+                data: {url: tab.url, auth: pw},
                 error: function()
                 {
                     $('#status').html('ERROR');
@@ -20,7 +20,7 @@ $(document).ready(function(){
                 {
                     try
                     {
-                        $json_response = $.parseJSON(response);
+                        $json_response = response;
                         $("#url").val($json_response.shortenedLink);
                         //Copy to clipboard
                         $('#url').select();

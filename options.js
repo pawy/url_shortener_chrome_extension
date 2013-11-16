@@ -12,8 +12,7 @@ function save_options() {
     $status.html('testing the service...');
     $.ajax({
         type: 'GET',
-        url: url,
-        data: {APIVersion: 'test'},
+        url: url + '/surlapi/version',
         error: function()
         {
             showError();
@@ -22,8 +21,8 @@ function save_options() {
         {
             try
             {
-                $json_response = $.parseJSON(response);
-                if($json_response.V >= 1)
+                $json_response = response;
+                if($json_response.V >= 2)
                 {
                     localStorage["options_url"] = url;
                     localStorage["options_password"] = $('#password').val();
