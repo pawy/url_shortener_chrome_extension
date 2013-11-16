@@ -21,11 +21,11 @@ $(document).ready(function(){
                     try
                     {
                         $json_response = response;
-                        $("#url").val($json_response.shortenedLink);
+                        $("#url").val($json_response.link);
                         //Copy to clipboard
                         $('#url').select();
                         document.execCommand("Copy");
-                        $('#status').html('Copied to clipboard');
+                        $('#status').html('Copied to clipbard');
                     }
                     catch(e)
                     {
