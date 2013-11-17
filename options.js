@@ -24,12 +24,17 @@ function save_options() {
                 $json_response = response;
                 if($json_response.V >= 2)
                 {
-                    localStorage["options_url"] = url;
-                    localStorage["options_password"] = $('#password').val();
-                    $status.html('changes saved!');
-                    setTimeout(function() {
-                        $status.fadeOut('slow');
-                    }, 2000);
+                    //use chrome sync storage
+                    var options = {
+                        url: url,
+                        password: $('#password').val()
+                    };
+                    chrome.storage.sync.set({'options': options}, function() {
+                        $status.html('changes saved!');
+                        setTimeout(function() {
+                            $status.fadeOut('slow');
+                        }, 2000);
+                    });
                 }
                 else
                 {
@@ -57,14 +62,13 @@ function showError()
 
 function restore_options() {
     $('#status').hide();
-
-    var url = localStorage["options_url"];
-    if (!url) return;
-    $('#url').val(url);
-
-    var pw = localStorage["options_password"];
-    if (!pw) return;
-    $('#password').val(pw);
+    chrome.storage.sync.get('options', function(val) {
+        var options = val.options;
+        if (!options.url) return;
+        $('#url').val(options.url);
+        if (!options.password) return;
+        $('#password').val(options.password);
+    });
 }
 
 $(document).ready(function(){

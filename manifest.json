@@ -15,7 +15,9 @@
 		"scripts": ["background.js"] 
 	},
 	"permissions" : [
-		"tabs","http://*/*","clipboardWrite"
+		"tabs","http://*/*",
+        "clipboardWrite",
+        "storage"
 	],
     "options_page": "options.html",
     "icons" : {
