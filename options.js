@@ -20,14 +20,38 @@ function save_options() {
                 $json_response = response;
                 if($json_response.V >= 2)
                 {
-                    //use chrome sync storage
-                    var options = {
-                        url: url,
-                        password: $('#password').val()
-                    };
-                    chrome.storage.sync.set({'options': options}, function() {
-                        $status.html('changes saved!');
-                        hideStatus();
+                    $status.html('encrypting the password...');
+                    $.ajax({
+                        type: 'GET',
+                        url: url + '/surlapi/md5/' + $('#password').val(),
+                        error: function()
+                        {
+                            showError();
+                        },
+                        success: function(response)
+                        {
+                            try
+                            {
+                                chrome.storage.sync.get('options', function(val) {
+                                    var options = val.options;
+                                    //check if the password has changed
+                                    var pw = $('#password').val() != options.password ? response.md5 : $('#password').val();
+                                    //use chrome sync storage
+                                    var options = {
+                                        url: url,
+                                        password: pw
+                                    };
+                                    chrome.storage.sync.set({'options': options}, function() {
+                                        $status.html('changes saved!');
+                                        hideStatus();
+                                    });
+                                });
+                            }
+                            catch(e)
+                            {
+                                showError();
+                            }
+                        }
                     });
                 }
                 else
