@@ -2,11 +2,7 @@ function save_options() {
 
     var url = $('#url').val();
     $status = $('#status');
-
-    //Reset message
-    $status.addClass('alert-info');
-    $status.removeClass('alert-danger');
-    $status.fadeIn('slow');
+    resetStatus();
 
     //Test the url shortener service
     $status.html('testing the service...');
@@ -31,9 +27,7 @@ function save_options() {
                     };
                     chrome.storage.sync.set({'options': options}, function() {
                         $status.html('changes saved!');
-                        setTimeout(function() {
-                            $status.fadeOut('slow');
-                        }, 2000);
+                        hideStatus();
                     });
                 }
                 else
@@ -71,6 +65,21 @@ function restore_options() {
     });
 }
 
+function resetStatus()
+{
+    //Reset message
+    $status.addClass('alert-info');
+    $status.removeClass('alert-danger');
+    $status.fadeIn('slow');
+}
+
+function hideStatus()
+{
+    setTimeout(function() {
+        $status.fadeOut('slow');
+    }, 2000);
+}
+
 $(document).ready(function(){
 
     restore_options();
@@ -82,5 +91,39 @@ $(document).ready(function(){
 
     $('#doubleu').click(function(){
        $('#url').val("http://doubleu.ch");
+    });
+
+    $('#md5').click(function(event){
+        event.preventDefault();
+
+        //use the surlapi/md5
+        var url = $('#url').val();
+        $status = $('#status');
+        resetStatus();
+
+        //Test the url shortener service
+        $status.html('using the api to encrypt...');
+
+        $.ajax({
+            type: 'GET',
+            url: url + '/surlapi/md5/' + $('#password').val(),
+            error: function()
+            {
+                showError();
+            },
+            success: function(response)
+            {
+                try
+                {
+                    $status.html('encrypted with md5');
+                    $('#password').val(response.md5);
+                    hideStatus();
+                }
+                catch(e)
+                {
+                    showError();
+                }
+            }
+        });
     });
 });

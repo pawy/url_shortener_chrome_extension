@@ -20,8 +20,9 @@
                 <input type="url" class="form-control" placeholder="http://yourdomain.com/short" id="url" required/>
             </div>
             <div class="form-group">
-                <label for="password">MD5 encrypted password (optional)</label>
+                <label for="password">MD5 encrypted password (if configured on the server)</label>
                 <input type="text" class="form-control" placeholder="the md5 encrypted password" id="password"/>
+                <input type="button" value="encrypt" id="md5" class="btn btn-default" />
             </div>
             <hr>
                 <button id="save" class="btn btn-primary">Save Settings</button>
