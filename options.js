@@ -114,8 +114,8 @@ $(document).ready(function(){
         event.preventDefault();
     });
 
-    $('#doubleu').click(function(){
-       $('#url').val("http://doubleu.ch");
+    $('#surlbz').click(function(){
+       $('#url').val("http://surl.bz");
     });
 
     $('#md5').click(function(event){
