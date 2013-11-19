@@ -34,8 +34,9 @@ function save_options() {
                             {
                                 chrome.storage.sync.get('options', function(val) {
                                     var options = val.options;
+
                                     //check if the password has changed
-                                    var pw = $('#password').val() != options.password ? response.md5 : $('#password').val();
+                                    var pw = options && $('#password').val() != options.password ? response.md5 : $('#password').val();
                                     //use chrome sync storage
                                     var options = {
                                         url: url,
